@@ -1,0 +1,58 @@
+import csv
+from pathlib import Path
+from typing import List, Any, Union
+
+def write_text_file(file_path: Union[str, Path], content: str) -> None:
+    """写入文本文件
+    
+    Args:
+        file_path: 文件路径
+        content: 要写入的内容
+    """
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(content)
+
+def read_text_file(file_path: Union[str, Path]) -> str:
+    """读取文本文件内容
+    
+    Args:
+        file_path: 文件路径
+        
+    Returns:
+        文件内容字符串
+    """
+    with open(file_path, "r", encoding="utf-8") as f:
+        return f.read()
+
+def write_csv_file(file_path: Union[str, Path], data: List[List[Any]]) -> None:
+    """写入CSV文件
+    
+    Args:
+        file_path: 文件路径
+        data: 二维数据列表
+    """
+    with open(file_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerows(data)
+
+def demonstrate_file_operations() -> None:
+    """演示文件操作"""
+    # 文本文件写入和读取
+    text_file = Path("example.txt")
+    write_text_file(text_file, "Hello, Python!\n")
+    content = read_text_file(text_file)
+    print("文本文件内容:")
+    print(content, end="")  # 避免额外的空行
+    
+    # CSV文件操作
+    csv_file = Path("data.csv")
+    csv_data = [
+        ["Name", "Age"],
+        ["Alice", 20],
+        ["Bob", 22]
+    ]
+    write_csv_file(csv_file, csv_data)
+    print(f"\nCSV文件已写入: {csv_file}")
+
+if __name__ == "__main__":
+    demonstrate_file_operations()

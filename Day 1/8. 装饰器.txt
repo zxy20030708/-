@@ -1,0 +1,54 @@
+from typing import Callable, Any, TypeVar, cast
+from functools import wraps
+
+F = TypeVar('F', bound=Callable[..., Any])
+
+def my_decorator(func: F) -> F:
+    """简单的装饰器，在函数调用前后打印消息"""
+    @wraps(func)  # 保留原始函数的元数据
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
+        print("Before function")
+        result = func(*args, **kwargs)
+        print("After function")
+        return result
+    return cast(F, wrapper)
+
+@my_decorator
+def say_hello() -> None:
+    """打招呼函数"""
+    print("Hello!")
+
+def repeat(n: int) -> Callable[[F], F]:
+    """生成可以重复执行函数的装饰器
+    
+    Args:
+        n: 重复执行的次数
+    """
+    def decorator(func: F) -> F:
+        @wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            for _ in range(n):
+                result = func(*args, **kwargs)
+            return result
+        return cast(F, wrapper)
+    return decorator
+
+@repeat(3)
+def greet(name: str) -> None:
+    """向指定人打招呼
+    
+    Args:
+        name: 要打招呼的人名
+    """
+    print(f"Hi, {name}!")
+
+def demonstrate_decorators() -> None:
+    """演示装饰器用法"""
+    print("=== 简单装饰器演示 ===")
+    say_hello()
+    
+    print("\n=== 带参数装饰器演示 ===")
+    greet("Alice")
+
+if __name__ == "__main__":
+    demonstrate_decorators()

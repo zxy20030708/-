@@ -1,0 +1,50 @@
+# mymodule.py
+"""自定义模块示例"""
+
+def say_hello() -> str:
+    """返回模块问候语
+    
+    Returns:
+        str: 问候字符串
+    """
+    return "Hello from module!"
+
+
+# main.py
+"""主程序入口"""
+from typing import Optional
+import requests
+from mypackage import mymodule as pkg_module  # 包内模块别名
+
+def fetch_github_status() -> Optional[int]:
+    """获取GitHub API状态码
+    
+    Returns:
+        Optional[int]: 状态码(成功)或None(失败)
+    """
+    try:
+        response = requests.get(
+            "https://api.github.com",
+            timeout=5  # 添加超时设置
+        )
+        return response.status_code
+    except requests.RequestException as e:
+        print(f"请求失败: {e}")
+        return None
+
+def main() -> None:
+    """主函数"""
+    # 使用本地模块
+    print(mymodule.say_hello())  # Hello from module!
+    
+    # 使用第三方模块
+    status_code = fetch_github_status()
+    if status_code:
+        print(f"GitHub API状态码: {status_code}")  # 200
+    
+    # 使用包内模块
+    print(pkg_module.say_hello())
+
+if __name__ == "__main__":
+    import mymodule  # 本地模块导入放在这里避免循环导入
+    main()

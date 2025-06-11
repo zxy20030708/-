@@ -1,0 +1,25 @@
+# 变量定义与类型注解（Python 3.6+）
+name: str = "Alice"      # 字符串类型
+age: int = 20            # 整型
+grades: list[int] = [90, 85, 88]  # 整数列表
+info: dict[str, object] = {"name": "Alice", "age": 20}  # 字典
+
+# 类型转换（添加类型提示）
+age_str: str = str(age)
+number: int = int("123")
+
+# 作用域管理（更清晰的全局变量处理）
+GLOBAL_X: int = 10  # 使用全大写命名全局常量
+
+def modify_and_print_vars() -> None:
+    """演示变量作用域的函数"""
+    local_y: int = 5  # 局部变量
+    
+    global GLOBAL_X  # 显式声明使用全局变量
+    GLOBAL_X += 1
+    
+    print(f"函数内部 - GLOBAL_X: {GLOBAL_X}, local_y: {local_y}")
+
+# 函数调用
+modify_and_print_vars()
+print(f"函数外部 - GLOBAL_X: {GLOBAL_X}")

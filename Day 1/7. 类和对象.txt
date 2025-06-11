@@ -1,0 +1,61 @@
+from typing import Optional
+
+class Student:
+    """学生基类"""
+    
+    def __init__(self, name: str, age: int) -> None:
+        """初始化学生实例
+        
+        Args:
+            name: 学生姓名
+            age: 学生年龄
+        """
+        self.name = name
+        self.age = age
+
+    def introduce(self) -> str:
+        """学生自我介绍
+        
+        Returns:
+            自我介绍字符串
+        """
+        return f"I am {self.name}, {self.age} years old."
+
+
+class GradStudent(Student):
+    """研究生类，继承自Student"""
+    
+    def __init__(self, name: str, age: int, major: str) -> None:
+        """初始化研究生实例
+        
+        Args:
+            name: 学生姓名
+            age: 学生年龄
+            major: 专业
+        """
+        super().__init__(name, age)
+        self.major = major
+
+    def introduce(self) -> str:
+        """研究生自我介绍（重写父类方法）
+        
+        Returns:
+            包含专业信息的自我介绍字符串
+        """
+        return f"I am {self.name}, a {self.major} student."
+
+
+def demonstrate_classes() -> None:
+    """演示类的使用"""
+    # 创建学生实例
+    student = Student("Alice", 20)
+    # 创建研究生实例
+    grad_student = GradStudent("Bob", 22, "Computer Science")
+    
+    # 调用方法
+    print(student.introduce())  # I am Alice, 20 years old.
+    print(grad_student.introduce())  # I am Bob, a Computer Science student.
+
+
+if __name__ == "__main__":
+    demonstrate_classes()

@@ -1,0 +1,58 @@
+from typing import Callable, Any, Tuple
+
+def create_greeting(name: str, greeting: str = "Hello") -> str:
+    """生成问候语
+    
+    Args:
+        name: 要问候的人名
+        greeting: 问候语，默认为"Hello"
+    
+    Returns:
+        完整的问候字符串
+    """
+    return f"{greeting}, {name}!"
+
+def calculate_sum(*numbers: Tuple[int, ...]) -> int:
+    """计算任意数量数字的和
+    
+    Args:
+        *numbers: 要相加的数字
+        
+    Returns:
+        所有数字的和
+    """
+    return sum(numbers)
+
+def demonstrate_functions() -> None:
+    """演示各种函数用法"""
+    # 基本函数调用
+    print(create_greeting("Alice"))  # Hello, Alice!
+    print(create_greeting("Bob", "Hi"))  # Hi, Bob!
+    
+    # 可变参数函数
+    print(calculate_sum(1, 2, 3, 4))  # 10
+    
+    # 匿名函数(建议使用常规函数代替简单lambda)
+    def double(x: int) -> int:
+        """数字翻倍"""
+        return x * 2
+    
+    print(double(5))  # 10
+    
+    # 高阶函数
+    def apply_function(func: Callable[[Any], Any], value: Any) -> Any:
+        """应用函数到值上
+        
+        Args:
+            func: 要应用的函数
+            value: 要处理的值
+            
+        Returns:
+            函数处理后的结果
+        """
+        return func(value)
+    
+    print(apply_function(lambda x: x ** 2, 4))  # 16
+
+if __name__ == "__main__":
+    demonstrate_functions()

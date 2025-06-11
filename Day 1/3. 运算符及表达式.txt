@@ -1,0 +1,26 @@
+def demonstrate_operations():
+    """演示Python基本运算操作"""
+    # 算术运算（添加类型注解）
+    num1: int = 10
+    num2: int = 3
+    
+    # 更清晰的算术运算输出
+    print(f"算术运算:")
+    print(f"{num1} + {num2} = {num1 + num2}")      # 13
+    print(f"{num1} // {num2} = {num1 // num2}")    # 3 (整除)
+    print(f"{num1} ** {num2} = {num1 ** num2}")    # 1000 (幂运算)
+    
+    # 逻辑运算（使用布尔字面量）
+    condition_true: bool = True
+    condition_false: bool = False
+    
+    print("\n逻辑运算:")
+    print(f"{condition_true} and {condition_false} = {condition_true and condition_false}")  # False
+    print(f"{condition_true} or {condition_false} = {condition_true or condition_false}")     # True
+    
+    # 比较运算（添加说明）
+    print("\n比较运算:")
+    print(f"{num1} > {num2} = {num1 > num2}")      # True
+
+if __name__ == "__main__":
+    demonstrate_operations()

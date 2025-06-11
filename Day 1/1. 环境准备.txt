@@ -1,0 +1,36 @@
+#!/bin/bash
+# 设置Python开发环境的脚本
+
+# 检查Python版本
+echo "检查Python版本..."
+python --version || {
+    echo "错误：未检测到Python，请先安装Python"
+    exit 1
+}
+
+# 创建虚拟环境
+echo "创建虚拟环境..."
+python -m venv myenv || {
+    echo "错误：虚拟环境创建失败"
+    exit 1
+}
+
+# 激活虚拟环境
+echo "激活虚拟环境..."
+if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
+    source myenv/bin/activate
+elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
+    .\\myenv\\Scripts\\activate
+else
+    echo "错误：不支持的操作系统类型"
+    exit 1
+fi
+
+# 安装依赖
+echo "安装requests库..."
+pip install requests || {
+    echo "错误：依赖安装失败"
+    exit 1
+}
+
+echo "环境设置完成！"
